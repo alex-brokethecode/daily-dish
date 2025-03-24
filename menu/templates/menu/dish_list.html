@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menú del día</title>
+  </head>
+  <body>
+    <main>
+      <h1>Menú del Día</h1>
+      {% for dish in dishes %}
+      <article>
+        <img src="{{ dish.image.url }}" alt="{{ dish.name }}" />
+        <h2>{{ dish.name }}</h2>
+        {% if dish.description %}
+        <p>{{ dish.description }}</p>
+        {% endif %}
+        <p>
+          <span>S/. {{ dish.price }} - Quedan {{ dish.quantity }} platos</span>
+        </p>
+      </article>
+      {% empty %}
+      <p>Todavía no se tiene el menú del día</p>
+      {% endfor %}
+    </main>
+  </body>
+</html>
