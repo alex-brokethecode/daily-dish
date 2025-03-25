@@ -1,0 +1,18 @@
+{% extends "project/base.html" %} 
+
+{% block title %} Inicio {% endblock title %} 
+
+{% block content %}
+  <div class="container mx-auto p-4 grid grid-cols-1 md:grid-cols-2">
+    <div>
+        <h1 class="text-4xl font-bold mb-6 text-center">¡Bienvenidos a nuestra deliciosa experiencia culinaria!</h1>
+        <h2 class="mb-5">En nuestro restaurante. Ven y disfruta de platillos que te harán sentir como en casa.</h2>
+        <a href="{% url "menu:dish_list" %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
+            Ver Menú
+        </a>
+    </div>
+    <div>
+        <img src="https://www.truefoodkitchen.com/wp-content/uploads/2025/01/TFK016_01f_A1B00195-Enhanced-NR_v02.jpg" alt="hero">
+    </div>
+  </div>
+{% endblock content %}

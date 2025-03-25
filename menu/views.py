@@ -3,6 +3,10 @@ from django.shortcuts import render, get_object_or_404
 from .models import Dish
 
 
+def home(request):
+    return render(request=request, template_name='menu/home.html')
+
+
 def dish_list(request):
     dishes = Dish.objects.all()
     context = {'dishes': dishes}
