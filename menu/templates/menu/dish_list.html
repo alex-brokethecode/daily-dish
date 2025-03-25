@@ -1,27 +1,28 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Menú del día</title>
-  </head>
-  <body>
-    <main>
-      <h1>Menú del Día</h1>
+{% extends "project/base.html" %} 
+
+{% block title %}Menú del día{% endblock title %} 
+
+{% block content %}
+  <div class="container mx-auto p-4">
+    <h1 class="text-4xl font-bold mb-6 text-center">Menú del Día</h1>
+    {% if not dishes %}
+    <p class="text-center text-gray-500">Todavía no se tiene el menú del día</p>
+    {% endif %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {% for dish in dishes %}
-      <article>
-        <img src="{{ dish.image.url }}" alt="{{ dish.name }}" />
-        <h2>{{ dish.name }}</h2>
-        {% if dish.description %}
-        <p>{{ dish.description }}</p>
-        {% endif %}
-        <p>
-          <span>S/. {{ dish.price }} - Quedan {{ dish.quantity }} platos</span>
-        </p>
-      </article>
-      {% empty %}
-      <p>Todavía no se tiene el menú del día</p>
+        <article class="border rounded-lg p-4 shadow-md">
+          <a href="{% url "menu:dish_detail" pk=dish.id %}">
+            <img src="{{ dish.image.url }}" alt="{{ dish.name }}" class="w-full h-64 object-cover rounded-md mb-2" />
+            <h2 class="text-xl font-semibold mb-1">{{ dish.name }}</h2>
+            {% if dish.description %}
+              <p class="text-gray-600 mb-2">{{ dish.description }}</p>
+            {% endif %}
+            <p class="text-sm">
+              <span>S/. {{ dish.price }} - Quedan {{ dish.quantity }} platos</span>
+            </p>
+          </a>
+        </article>
       {% endfor %}
-    </main>
-  </body>
-</html>
+    </div>
+  </div>
+{% endblock content %}
