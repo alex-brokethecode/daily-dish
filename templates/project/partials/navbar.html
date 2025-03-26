@@ -1,23 +1,41 @@
-<nav class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
-    <div class="flex items-center">
-        <a href="{% url "menu:dish_list" %}">
-            <span class="text-xl cursor-pointer text-blue-500 font-[1000] italic hover:font-semibold">Yummy!</span> 
-        </a>
-    </div>
-    <ul class="hidden md:flex space-x-6">
-        <li><a href="{% url "menu:home" %}" class="text-gray-700 hover:text-blue-500">Inicio</a></li>
-        <li><a href="{% url "menu:dish_list" %}" class="text-gray-700 hover:text-blue-500">Menú Diario</a></li>
-    </ul>
-    <div class="md:hidden">
-        <button class="text-gray-700 focus:outline-none">
-            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
+<nav class="navbar navbar-expand-lg bg-primary mb-5" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url "menu:home" %}">Yummy!</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarColor01"
+      aria-controls="navbarColor01"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- TODO: Center navbar options -->
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url "menu:home" %}"
+            >Inicio
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url "menu:dish_list" %}">Menú del Día</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input
+          class="form-control me-2 me-sm-2"
+          type="search"
+          placeholder="Platillo..."
+        />
+        <button class="btn btn-light my-2 my-sm-0" type="submit">
+          Buscar
         </button>
+      </form>
     </div>
-    <div class="hidden md:block">
-        <a href="{% url "menu:dish_list" %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
-            Ver Menú
-        </a>
-    </div>
+  </div>
 </nav>
