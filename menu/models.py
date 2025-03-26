@@ -6,8 +6,6 @@ class Dish(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='dishes/')
-    quantity = models.PositiveSmallIntegerField(
-        validators=[MaxValueValidator(100)])
     price = models.DecimalField(max_digits=5, decimal_places=2)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -19,3 +17,37 @@ class Dish(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+
+class Menu(models.Model):
+    date = models.DateField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Menu'
+        verbose_name_plural = 'Menus'
+        ordering = ('-date', )
+
+    def __str__(self) -> str:
+        return f'Menu for {self.date}'
+
+
+class MenuItem(models.Model):
+    menu = models.ForeignKey(
+        Menu, on_delete=models.CASCADE, related_name='menu_items')
+    dish = models.ForeignKey(
+        Dish, on_delete=models.CASCADE, related_name='menu_items')
+    stock = models.PositiveSmallIntegerField(
+        validators=[MaxValueValidator(100)])
+    sold = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        # A dish can appear only once per menu
+        unique_together = ('menu', 'dish',)
+
+    def remaining_stock(self) -> int:
+        return self.stock - self.sold
+
+    def __str__(self) -> str:
+        return f'{self.dish.name} in {self.menu}'
