@@ -1,20 +1,20 @@
-{% extends "project/base.html" %} 
+{% extends "project/base.html" %}
 
-{% block title %} Inicio {% endblock title %} 
+{% block title %} Inicio {% endblock title %}
 
 {% block content %}
-  <div class="container p-4 mx-auto">
-    <div class="row align-items-center">
-      <div class="col-12 col-sm-6 pe-md-5">
-        <h1 class="mb-4 text-wrap">¡Bienvenidos a nuestra deliciosa experiencia culinaria!</h1>
-        <p class="mb-4 mb-md-5 fs-5 text-wrap">En nuestro restaurante. Ven y disfruta de platillos que te harán sentir como en casa.</p>
-        <a href="{% url "menu:dish_list" %}" class="btn btn-primary px-5">
-          Ver Menú
-        </a>
-      </div>
-      <div class="col-12 col-sm-6 mt-5 mt-md-1">
-        <img src="https://www.truefoodkitchen.com/wp-content/uploads/2025/01/TFK016_01f_A1B00195-Enhanced-NR_v02.jpg" alt="hero" class="img-fluid">
-      </div>
-    </div>
-  </div>
+<div class="container p-4 mx-auto">
+    <div class="row align-items-stretch">
+        <div class="col-12 col-sm-6 pe-md-5 d-flex flex-column justify-content-center">
+            <h1 class="mb-4 text-wrap">¡Bienvenidos a nuestra deliciosa experiencia culinaria!</h1>
+            <p class="mb-4 mb-md-5 fs-5 text-wrap">En nuestro restaurante. Ven y disfruta de platillos que te harán sentir como en casa.</p>
+            <a href="{% url "menu:dish_list" %}" class="btn btn-primary px-5">
+                Ver Menú
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 mt-5 mt-md-1">
+            <img src="https://www.truefoodkitchen.com/wp-content/uploads/2025/01/TFK016_01f_A1B00195-Enhanced-NR_v02.jpg" alt="hero" class="img-fluid h-100 object-fit-cover">
+        </div>
+        </div>
+</div>
 {% endblock content %}
