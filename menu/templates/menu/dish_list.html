@@ -1,28 +1,34 @@
-{% extends "project/base.html" %} 
+{% extends "project/base.html" %}
 
-{% block title %}Menú del día{% endblock title %} 
+{% block title %}Menú del día{% endblock title %}
 
 {% block content %}
-  <div class="container mx-auto p-4">
-    <h1 class="text-4xl font-bold mb-6 text-center">Menú del Día</h1>
+  <div class="container py-4">
+    <h1 class="text-center mb-4">Menú del Día</h1>
     {% if not dishes %}
-    <p class="text-center text-gray-500">Todavía no se tiene el menú del día</p>
-    {% endif %}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <p class="text-center text-muted">Todavía no se tiene el menú del día</p>
+    {% else %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
       {% for dish in dishes %}
-        <article class="border rounded-lg p-4 shadow-md">
-          <a href="{% url "menu:dish_detail" pk=dish.id %}">
-            <img src="{{ dish.image.url }}" alt="{{ dish.name }}" class="w-full h-64 object-cover rounded-md mb-2" />
-            <h2 class="text-xl font-semibold mb-1">{{ dish.name }}</h2>
-            {% if dish.description %}
-              <p class="text-gray-600 mb-2">{{ dish.description }}</p>
-            {% endif %}
-            <p class="text-sm">
-              <span>S/. {{ dish.price }} - Quedan {{ dish.quantity }} platos</span>
-            </p>
-          </a>
-        </article>
+        <div class="col">
+          <!-- TODO: Manage height of cards to be at the same level -->
+          <div class="card shadow-sm">
+            <a href="{% url "menu:dish_detail" pk=dish.id %}" style="text-decoration: none">
+              <img src="{{ dish.image.url }}" class="card-img-top" alt="{{ dish.name }}">
+              <div class="card-body">
+                <h5 class="card-title">{{ dish.name }}</h5>
+                {% if dish.description %}
+                  <p class="card-text text-muted">{{ dish.description }}</p>
+                {% endif %}
+                <p class="card-text">
+                  <small class="text-muted">S/. {{ dish.price }} - Quedan {{ dish.quantity }} platos</small>
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
       {% endfor %}
     </div>
+    {% endif %}
   </div>
 {% endblock content %}
