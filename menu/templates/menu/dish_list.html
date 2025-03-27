@@ -9,15 +9,15 @@
     <p class="text-center text-muted">Todavía no se tiene el menú del día</p>
     {% else %}
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
-        {% for item in menu.menu_items.all %}
+        {% for item in menu.menu_items.all %} <!-- menu.menuitem_set.all() -->
         <div class="col d-flex">
             <div class="card shadow-sm flex-fill">
                 <a href="{% url "menu:dish_detail" pk=item.dish.id %}" class="d-flex flex-column h-100" style="text-decoration: none">
                     <img src="{{ item.dish.image.url }}" class="card-img-top" alt="{{ item.dish.name }}">
                     <div class="card-body flex-grow-1">
                         <h5 class="card-title">{{ item.dish.name|title }}</h5>
-                        {% if item.description %}
-                        <p class="card-text text-muted">{{ item.description }}</p>
+                        {% if item.dish.description %}
+                        <p class="card-text text-muted">{{ item.dish.description }}</p>
                         {% endif %}
                         <p class="card-text">
                             <small class="text-muted">S/. {{ item.dish.price }} - Quedan {{ item.remaining_stock }} platos</small>
