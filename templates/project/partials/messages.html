@@ -1,0 +1,8 @@
+{% for message in messages %}
+<div class="container alert alert-dismissible mb-5 
+    alert-{% if message.tags == 'success' %}success{% elif message.tags == 'error' %}danger{% else %}info{% endif %}" 
+    style="{% if request.path != '/' %}max-width: 50rem;{% endif %}">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    {{ message }}
+</div>
+{% endfor %}

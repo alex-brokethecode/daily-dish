@@ -2,9 +2,40 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
+from manager.models import BusinessInfo
+from .forms import LoginForm
+
+# TODO: Check view and improve it
+
 
 def login_view(request):
-    return render(request=request, template_name='accounts/login.html')
+    next_url = request.GET.get('next', 'menu:home')
+
+    if request.user.is_authenticated:
+        return redirect(next_url)
+
+    form = LoginForm(data=request.POST or None)
+
+    if request.method == 'POST' and form.is_valid():
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            # messages.success(request, 'You have successfully logged in!') # TODO: Add messages
+            return redirect(next_url)
+        else:
+            # TODO: Display Error
+            form.add_error(None, 'Invalid username or password')
+
+    context = {
+        'business_name': BusinessInfo.objects.first().name,  # type: ignore
+        'form': form,
+    }
+
+    return render(request=request, template_name='accounts/login.html', context=context)
 
 
 @login_required(login_url='accounts:login')
