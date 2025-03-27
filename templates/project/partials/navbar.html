@@ -26,6 +26,13 @@
           <a class="nav-link {% if request.path == '/menu/' %}active{% endif %}" href="{% url "menu:dish_list" %}">Menú del Día</a>
         </li>
       </ul>
+      <div class="d-flex align-items-center">
+        {% if user.is_authenticated %}
+        <a href="/" class="btn btn-outline-light btn-sm my-2 my-sm-0" title="{{ user|upper }}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+        {% else %}
+        <a href="/" class="btn btn-outline-light btn-sm my-2 my-sm-0" title="Iniciar sesión"><i class="fa-solid fa-user"></i></a>
+        {% endif %}
+      </div>
     </div>
     <!-- Menu Options Start -->
   </div>
