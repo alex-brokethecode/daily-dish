@@ -1,6 +1,15 @@
 from django.db import models
 from django.core.validators import MaxValueValidator
 
+# TODO: Create a model for business information (contact & social media)
+# TODO: Test deployment
+
+# NOTE: Add buttons for authenticated user to reduce the stock / others options
+# NOTE: Add a button to add dishes for the daily menu (In case user want to add a new one)
+# NOTE: Add categories for soups and main dishes
+# NOTE: Add information of attention (free drink or yapa)
+# NOTE: Display a section for day summary (sold dishes, money, etc.)
+
 
 class Dish(models.Model):
     name = models.CharField(max_length=100)

@@ -17,13 +17,13 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="{% url "menu:home" %}"
-            >Inicio
-            <span class="visually-hidden">(current)</span>
+          <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url "menu:home" %}"
+            >Inicio 
+            {% comment %} <span class="visually-hidden">(current)</span> {% endcomment %}
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url "menu:dish_list" %}">Menú del Día</a>
+          <a class="nav-link {% if request.path == '/menu/' %}active{% endif %}" href="{% url "menu:dish_list" %}">Menú del Día</a>
         </li>
       </ul>
       <form class="d-flex">
