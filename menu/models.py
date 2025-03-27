@@ -1,7 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator
 
-# TODO: Create a model for business information (contact & social media)
 # TODO: Test deployment
 
 # NOTE: Add buttons for authenticated user to reduce the stock / others options

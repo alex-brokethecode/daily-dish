@@ -1,17 +1,15 @@
 <footer class="py-2 py-md-3">
   <div class="container">
-    <hr class="my-4" />
+    <hr class="my-3" />
 
     <!-- Footer Start -->
-    <div class="d-flex justify-content-between mb-2">
+    <div class="d-flex {% if business.facebook_url %}justify-content-between{% else %}justify-content-center{% endif %} mb-2">
       <!-- Logo Start -->
-      <div class="col-md-6">
-        <p class="text-primary mb-0 fw-semibold">Arequipa, Peru - <script>document.write(new Date().getFullYear())</script></p>
-      </div>
+        <p class="text-primary mb-0 fw-md-semibold">Arequipa, Peru - <script>document.write(new Date().getFullYear())</script></p>
       <!-- Logo End -->
 
       <!-- Social Start -->
-      <div class="col-md-6 text-md-end">
+      <div class="text-md-end">
         {% if business.facebook_url %}
         <a
           href="{{ business.facebook_url }}"

@@ -5,7 +5,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('menu.urls', namespace='menu'))
+    path('', include('menu.urls', namespace='menu')),
+    path('manager/', include('manager.urls', namespace='manager')),
 ]
 
 if settings.DEBUG:

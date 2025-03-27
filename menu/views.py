@@ -6,23 +6,26 @@ from manager.models import BusinessInfo
 
 
 def home(request):
-    context = {'business': BusinessInfo.objects.first()}
+    context = {
+        'business': BusinessInfo.objects.first(),
+        'business_name': BusinessInfo.objects.first().name,  # type: ignore
+    }
     return render(request=request, template_name='menu/home.html', context=context)
 
 
 def dish_list(request):
     today = now().date()
-    menu = Menu.objects.filter(date=today).first()
-    business = BusinessInfo.objects.first()
 
-    context = {'menu': menu, 'business': business}
+    context = {
+        'menu': Menu.objects.filter(date=today).first(),
+        'business_name': BusinessInfo.objects.first().name,  # type: ignore
+    }
 
     return render(request=request, template_name='menu/dish_list.html', context=context)
 
 
 def dish_detail(request, pk):
     dish = get_object_or_404(Dish, id=pk)
-    business = BusinessInfo.objects.first()
 
     # Get today's menu (if it exists)
     today = now().date()
@@ -35,6 +38,10 @@ def dish_detail(request, pk):
         if menu_item:
             stock = menu_item.remaining_stock
 
-    context = {'dish': dish, 'stock': stock, 'business': business}
+    context = {
+        'dish': dish,
+        'stock': stock,
+        'business_name': BusinessInfo.objects.first().name,  # type: ignore
+    }
 
     return render(request=request, template_name='menu/dish_detail.html', context=context)
