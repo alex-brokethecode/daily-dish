@@ -6,33 +6,39 @@
     <div class="d-flex justify-content-between mb-2">
       <!-- Logo Start -->
       <div class="col-md-6">
-        <p class="text-primary mb-0 fw-semibold">Arequipa, Perú - 2025</p>
+        <p class="text-primary mb-0 fw-semibold">Arequipa, Peru - <script>document.write(new Date().getFullYear())</script></p>
       </div>
       <!-- Logo End -->
 
       <!-- Social Start -->
       <div class="col-md-6 text-md-end">
+        {% if business.facebook_url %}
         <a
-          href="https://www.facebook.com"
+          href="{{ business.facebook_url }}"
           class="text-white me-3 fs-5"
           target="_blank"
           title="Facebook"
           ><i class="fa-brands fa-facebook text-primary"></i
         ></a>
+        {% endif %} 
+        {% if business.instagram_url %}
         <a
-          href="https://www.instagram.com"
+          href="{{ instagram_url }}"
           class="text-white me-3 fs-5"
           target="_blank"
           title="Instagram"
           ><i class="fa-brands fa-instagram text-primary"></i
         ></a>
+        {% endif %} 
+        {% if business.tiktok_url %}
         <a
-          href="https://www.tiktok.com"
+          href="{{ business.tiktok_url }}"
           class="text-white me-3 fs-5"
           target="_blank"
           title="TikTok"
           ><i class="fa-brands fa-tiktok text-primary"></i
         ></a>
+        {% endif %}
       </div>
       <!-- Social End -->
     </div>

@@ -10,8 +10,7 @@
         <i class="fa-solid fa-location-dot me-2"></i>
         <h5 class="mb-0">Dirección</h5>
       </div>
-      <p class="text-muted mb-0">Urb. J. L. Bustamante y Rivero</p>
-      <p class="text-muted"> Mz. 2h Lt. 3 Sect. 6</p>
+      <p class="text-muted mb-0">{{ business.address }}</p>
     </div>
     <!-- About Item End -->
 
@@ -23,8 +22,7 @@
         <i class="fa-solid fa-clock me-2"></i>
         <h5 class="mb-0">Horario de Atención</h5>
       </div>
-      <p class="text-muted mb-0">Lunes a Sábado</p>
-      <p class="text-muted">5:30 AM - 11:00 AM</p>
+      <p class="text-muted mb-0">{{ business.business_hour }}</p>
     </div>
     <!-- About Item End -->
 
@@ -36,10 +34,9 @@
         <i class="fa-solid fa-phone-volume me-2"></i>
         <h5 class="mb-0">Whatsapp</h5>
       </div>
-      <p class="text-muted">988 142 414</p>
+      <p class="text-muted">{{ business.phone_number }}</p>
     </div>
     <!-- About Item End -->
-
   </div>
   <!-- About End -->
 </div>
