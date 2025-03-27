@@ -22,13 +22,16 @@
                 <td>{{ item.sold }} de {{ item.stock }}</td>
                 <td>
                   <div class="d-flex align-items-center">
-                    <input type="number" name="sold" 
+                    <form action="{% url "manager:update_sold_dish" pk=item.id %}" method="post">
+                      <input type="number" name="sold" 
                       min="0" 
                       max={{ item.remaining_stock }} 
                       value="{{ item.remaining_stock }}" 
                       class="me-1"
                       />
-                    <a href="#" class="btn btn-sm btn-outline-primary mb-0"><i class="fa-solid fa-floppy-disk mb-0"></i></a>
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-sm btn-outline-primary mb-0"><i class="fa-solid fa-floppy-disk mb-0"></i></button>
+                    </form>
                   </div>
                 </td>
             </tr>
