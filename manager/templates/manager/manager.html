@@ -23,7 +23,7 @@
                 <td>
                   <!-- TODO: Disable when there are no more stock -->
                   <div class="d-flex align-items-center">
-                    <form action="{% url "manager:update_sold_dish" pk=item.id %}" method="post">
+                    <form action="{% url "manager:update_sold_dishes" pk=item.id %}" method="post">
                       <input type="number" name="sold" 
                       min="0" 
                       max={{ item.remaining_stock }} 

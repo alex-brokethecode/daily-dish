@@ -19,16 +19,23 @@ def manager(request):
     return render(request=request, template_name='manager/manager.html', context=context)
 
 
-# TODO: Check view logic
 @login_required(login_url='accounts:login')
 def update_sold_dishes(request, pk):
     menu_item = MenuItem.objects.get(id=pk)
 
     if request.method == 'POST':
         sold_dishes = request.POST.get('sold')
-        sold_dishes = int(sold_dishes)
 
-        # TODO: Validate number (can't be greater than stock number)
+        try:
+            sold_dishes = int(sold_dishes)
+        except ValueError:
+            messages.error(request, 'Cantidad no válida')
+            return redirect('manager:sales')
+
+        if sold_dishes > menu_item.remaining_stock():
+            messages.error(request, 'No hay suficiente stock')
+            return redirect('manager:sales')
+
         menu_item.sold = menu_item.sold + sold_dishes
         menu_item.save()
 
