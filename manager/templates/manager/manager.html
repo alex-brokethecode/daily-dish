@@ -5,8 +5,8 @@
 {% block title %} Manager {% endblock title %}
 
 {% block content %}
-<div class="container p-4 mx-auto my-4">
-    <h1 class="text-center mb-4 text-primary">Ventas del Día</h1>
+<div class="container p-4 mx-auto my-2 my-lg-4">
+    <h1 class="text-center mb-4 text-primary">Registrar Ventas</h1>
     <table class="table">
         <thead>
           <tr>
@@ -22,13 +22,12 @@
                 <td>{{ item.sold }} de {{ item.stock }}</td>
                 <td>
                   <!-- TODO: Disable when there are no more stock -->
-                  <div class="d-flex align-items-center">
+                  <div class="d-flex align-items-center justify-content-start">
                     <form action="{% url "manager:update_sold_dishes" pk=item.id %}" method="post">
                       <input type="number" name="sold" 
                       min="0" 
                       max={{ item.remaining_stock }} 
                       value="{% if item.remaining_stock > 0 %}1{% else %}0{% endif %}" 
-                      class="me-1 px-2"
                       style="max-width: 60px;"
                       />
                       {% csrf_token %}
@@ -40,5 +39,28 @@
           {% endfor %}
         </tbody>
     </table>
+
+    <!-- Revenue Start -->
+    <div class="mt-5 pt-2 pt-md-5">
+      <h2 class="text-center mb-4 text-primary fs-2 fw-bold">Total Ventas: S/.{{ menu.total_revenue }}</h2>
+
+      <div class="row justify-content-center mt-4">
+          {% for item in menu.menu_items.all %}
+          <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card bg-light h-100 shadow-md border-1">
+                  <div class="card-body text-center">
+                      <h4 class="text-primary fw-bold fs-3">{{ item.dish.name }}</h4>
+                      <hr>
+                      <p class="text-muted mb-0"><strong>Preparados:</strong> {{ item.stock }}</p>
+                      <p class="text-muted mb-0"><strong>Vendidos:</strong> {{ item.sold }}</p>
+                      <h5 class="text-primary fw-bold fs-5 mt-3">Total: S/.{{ item.total_sales }}</h5>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+    </div>
+    <!-- Revenue End -->
+
 </div>
 {% endblock content %}

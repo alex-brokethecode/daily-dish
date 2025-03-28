@@ -11,9 +11,10 @@ class DishAdmin(admin.ModelAdmin):
 
 class MenuItemInline(admin.TabularInline):  # Inline to embed inside MenuAdmin
     model = MenuItem
-    extra = 1  # Number of empty forms to show by default
+    extra = 10  # Number of empty forms to show by default
     autocomplete_fields = ('dish',)  # Enables search for dishes
-    fields = ('dish', 'stock', 'sold')  # Only show necessary fields
+    # Only show necessary fields
+    fields = ('dish', 'stock', 'sold', 'price_at_sale')
 
 
 @admin.register(Menu)

@@ -41,6 +41,12 @@ class Menu(models.Model):
     def __str__(self) -> str:
         return f'Menu for {self.date}'
 
+    def total_revenue(self):
+
+        return sum(
+            item.total_sales() for item in self.menu_items.all()  # type: ignore
+        )
+
 
 class MenuItem(models.Model):
     menu = models.ForeignKey(
@@ -50,16 +56,21 @@ class MenuItem(models.Model):
     stock = models.PositiveSmallIntegerField(
         validators=[MaxValueValidator(100)])
     sold = models.PositiveSmallIntegerField(default=0)
+    price_at_sale = models.DecimalField(
+        max_digits=5, decimal_places=2, blank=True)
 
     class Meta:
         # A dish can appear only once per menu
         unique_together = ('menu', 'dish',)
 
-    def remaining_stock(self) -> int:
-        return self.stock - self.sold
-
     def __str__(self) -> str:
         return f'{self.dish.name} in {self.menu}'
+
+    def remaining_stock(self):
+        return self.stock - self.sold
+
+    def total_sales(self):
+        return self.sold * self.price_at_sale
 
     def clean(self):
         # Validation for sold dishes and stock
@@ -69,4 +80,8 @@ class MenuItem(models.Model):
     def save(self, *args, **kwargs):
         # Validate before saving
         self.clean()
+
+        # If it's a new entry and price_at_sale is not set, use the current dish price
+        if not self.price_at_sale:
+            self.price_at_sale = self.dish.price
         super().save(*args, **kwargs)
