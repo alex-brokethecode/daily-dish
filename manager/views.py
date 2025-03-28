@@ -11,9 +11,10 @@ from menu.models import Menu, MenuItem
 def manager(request):
     today = now().date()
     menu = Menu.objects.filter(date=today).first()
+    business = BusinessInfo.objects.first()
 
     context = {
-        'business_name': BusinessInfo.objects.first().name,  # type: ignore
+        'business_name': business.name if business else 'Restaurante',  # type: ignore
         'menu': menu,
     }
     return render(request=request, template_name='manager/manager.html', context=context)

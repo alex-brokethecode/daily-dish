@@ -9,6 +9,7 @@ from .forms import LoginForm
 
 def login_view(request):
     next_url = request.GET.get('next', 'menu:home')
+    business = BusinessInfo.objects.first()
 
     if request.user.is_authenticated:
         return redirect(next_url)
@@ -26,7 +27,7 @@ def login_view(request):
             form.add_error(None, 'Usuario o contraseña incorrecta')
 
     context = {
-        'business_name': BusinessInfo.objects.first().name,  # type: ignore
+        'business_name': business.name if business else 'Restaurante',  # type: ignore
         'form': form,
     }
 

@@ -10,7 +10,9 @@
         <i class="fa-solid fa-location-dot me-2"></i>
         <h5 class="mb-0">Dirección</h5>
       </div>
-      <p class="text-muted mb-0">{{ business.address }}</p>
+      <p class="text-muted mb-0">
+        {% if business.address %} {{ business.address }} {% else %} Tu dirección {% endif %}
+      </p>
     </div>
     <!-- About Item End -->
 
@@ -22,7 +24,9 @@
         <i class="fa-solid fa-clock me-2"></i>
         <h5 class="mb-0">Horario de Atención</h5>
       </div>
-      <p class="text-muted mb-0">{{ business.business_hour }}</p>
+      <p class="text-muted mb-0">
+        {% if business.business_hour %} {{ business.business_hour }} {% else %} Tu horario de atención {% endif %}
+      </p>
     </div>
     <!-- About Item End -->
 
@@ -34,7 +38,9 @@
         <i class="fa-solid fa-phone-volume me-2"></i>
         <h5 class="mb-0">Whatsapp</h5>
       </div>
-      <p class="text-muted">{{ business.phone_number }}</p>
+      <p class="text-muted">
+        {% if business.phone_number %} {{ business.phone_number }} {% else %} 999 999 999 {% endif %}
+      </p>
     </div>
     <!-- About Item End -->
   </div>

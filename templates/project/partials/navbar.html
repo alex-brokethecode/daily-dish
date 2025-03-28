@@ -25,7 +25,7 @@
         <li class="nav-item">
           <a class="nav-link {% if request.path == '/menu/' %}active{% endif %}" href="{% url "menu:dish_list" %}">Menú del Día</a>
         </li>
-        {% if user.is_authenticated %} <!-- TODO: Check paths or rename them -->
+        {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link {% if request.path == '/manager/' %}active{% endif %}" href="{% url "manager:sales" %}">Ventas</a>
         </li>

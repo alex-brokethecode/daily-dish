@@ -2,13 +2,11 @@ from django.db import models
 from django.core.validators import MaxValueValidator
 from django.core.exceptions import ValidationError
 
-# TODO: Test deployment
 
-# NOTE: Add buttons for authenticated user to reduce the stock / others options
+# NOTE: Allow user to fix input errors in sold items
 # NOTE: Add a button to add dishes for the daily menu (In case user want to add a new one)
 # NOTE: Add categories for soups and main dishes
 # NOTE: Add information of attention (free drink or yapa)
-# NOTE: Display a section for day summary (sold dishes, money, etc.)
 
 
 class Dish(models.Model):
