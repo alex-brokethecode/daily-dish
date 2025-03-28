@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator
+from django.core.exceptions import ValidationError
 
 # TODO: Test deployment
 
@@ -59,3 +60,13 @@ class MenuItem(models.Model):
 
     def __str__(self) -> str:
         return f'{self.dish.name} in {self.menu}'
+
+    def clean(self):
+        # Validation for sold dishes and stock
+        if self.sold > self.stock:
+            raise ValidationError('Número de platos vendidos mayor al stock')
+
+    def save(self, *args, **kwargs):
+        # Validate before saving
+        self.clean()
+        super().save(*args, **kwargs)
