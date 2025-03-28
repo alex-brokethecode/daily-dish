@@ -20,10 +20,10 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            messages.success(request, 'You have successfully logged in!')
+            messages.success(request, 'Ha iniciado sesión correctamente')
             return redirect(next_url)
         else:
-            form.add_error(None, 'Invalid username or password')
+            form.add_error(None, 'Usuario o contraseña incorrecta')
 
     context = {
         'business_name': BusinessInfo.objects.first().name,  # type: ignore
@@ -36,4 +36,5 @@ def login_view(request):
 @login_required(login_url='accounts:login')
 def logout_view(request):
     logout(request)
+    messages.success(request, 'Ha cerrado sesión correctamente')
     return redirect('menu:home')

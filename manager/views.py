@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.utils.timezone import now
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from .models import BusinessInfo
 from menu.models import Menu, MenuItem
@@ -31,6 +32,5 @@ def update_sold_dishes(request, pk):
         menu_item.sold = menu_item.sold + sold_dishes
         menu_item.save()
 
-        # TODO: Add messages
-
+        messages.success(request, 'Cantidad actualizada correctamente')
     return redirect('manager:sales')
