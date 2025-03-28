@@ -27,10 +27,11 @@
                       min="0" 
                       max={{ item.remaining_stock }} 
                       value="{{ item.remaining_stock }}" 
-                      class="me-1"
+                      class="me-1 px-2"
+                      style="max-width: 60px;"
                       />
                       {% csrf_token %}
-                      <button type="submit" class="btn btn-sm btn-outline-primary mb-0"><i class="fa-solid fa-floppy-disk mb-0"></i></button>
+                      <button type="submit" class="btn btn-sm btn-outline-primary mb-0" title="Save"><i class="fa-solid fa-floppy-disk"></i></button>
                     </form>
                   </div>
                 </td>

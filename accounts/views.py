@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from manager.models import BusinessInfo
 from .forms import LoginForm
-
-# TODO: Check view and improve it
 
 
 def login_view(request):
@@ -14,20 +13,16 @@ def login_view(request):
     if request.user.is_authenticated:
         return redirect(next_url)
 
-    form = LoginForm(data=request.POST or None)
+    form = LoginForm(request, data=request.POST or None)
 
     if request.method == 'POST' and form.is_valid():
-        username = form.cleaned_data.get('username')
-        password = form.cleaned_data.get('password')
-
-        user = authenticate(request, username=username, password=password)
+        user = form.get_user()
 
         if user is not None:
             login(request, user)
-            # messages.success(request, 'You have successfully logged in!') # TODO: Add messages
+            messages.success(request, 'You have successfully logged in!')
             return redirect(next_url)
         else:
-            # TODO: Display Error
             form.add_error(None, 'Invalid username or password')
 
     context = {
