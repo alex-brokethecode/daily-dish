@@ -7,6 +7,7 @@ class DishAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'created',)
     search_fields = ('name', 'description',)
     list_filter = ('created', 'updated', 'price',)
+    readonly_fields = ('created', 'updated',)
 
 
 class MenuItemInline(admin.TabularInline):  # Inline to embed inside MenuAdmin
