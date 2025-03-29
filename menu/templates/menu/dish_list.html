@@ -16,9 +16,6 @@
                     <img src="{{ item.dish.image.url }}" class="card-img-top" alt="{{ item.dish.name }}">
                     <div class="card-body flex-grow-1">
                         <h5 class="card-title">{{ item.dish.name|title }}</h5>
-                        {% if item.dish.description %}
-                        <p class="card-text text-muted">{{ item.dish.description }}</p>
-                        {% endif %}
                         <p class="card-text">
                             <small class="text-muted">S/. {{ item.price_at_sale }} - Quedan {{ item.remaining_stock }} platos</small>
                         </p>
