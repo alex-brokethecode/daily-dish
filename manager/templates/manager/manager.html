@@ -1,0 +1,71 @@
+{% extends "project/base.html" %}
+
+{% load static %}
+
+{% block title %} Manager {% endblock title %}
+
+{% block content %}
+<div class="container p-4 mx-auto my-2 my-lg-4">
+    <h1 class="text-center mb-4 text-primary">Registrar Ventas</h1>
+    {% if menu %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Platillo</th>
+            <th scope="col">Vendidos</th>
+            <th scope="col">Vender</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for item in menu.menu_items.all %}
+            <tr class="{% if item.remaining_stock == 0 %}table-secondary{% endif %}">
+                <td>{{ item.dish.name }}</td>
+                <td>{{ item.sold }} de {{ item.stock }}</td>
+                <td>
+                  <div class="d-flex align-items-center justify-content-start">
+                    <form action="{% url "manager:update_sold_dishes" pk=item.id %}" method="post">
+                      <input type="number" name="sold" 
+                      min="0" 
+                      max={{ item.remaining_stock }} 
+                      value="{% if item.remaining_stock > 0 %}1{% else %}0{% endif %}" 
+                      style="max-width: 60px;"
+                      />
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-sm btn-outline-primary mb-0" title="Save"><i class="fa-solid fa-floppy-disk"></i></button>
+                    </form>
+                  </div>
+                </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="text-center">Todavía no se subieron datos</p>
+    {% endif %}
+
+    {% if menu %}
+    <!-- Revenue Start -->
+    <div class="mt-5 pt-2 pt-md-5">
+      <h2 class="text-center mb-4 text-primary fs-2 fw-bold">Total Ventas: S/.{{ menu.total_revenue }}</h2>
+
+      <div class="row justify-content-center mt-4">
+          {% for item in menu.menu_items.all %}
+          <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card bg-light h-100 shadow-md border-1">
+                  <div class="card-body text-center">
+                      <h4 class="text-primary fw-bold fs-3">{{ item.dish.name }}</h4>
+                      <hr>
+                      <p class="text-muted mb-0"><strong>Preparados:</strong> {{ item.stock }}</p>
+                      <p class="text-muted mb-0"><strong>Vendidos:</strong> {{ item.sold }}</p>
+                      <h5 class="text-primary fw-bold fs-5 mt-3">Total: S/.{{ item.total_sales }}</h5>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+    </div>
+    <!-- Revenue End -->
+    {% endif %}
+
+</div>
+{% endblock content %}

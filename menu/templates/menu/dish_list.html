@@ -1,27 +1,30 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Menú del día</title>
-  </head>
-  <body>
-    <main>
-      <h1>Menú del Día</h1>
-      {% for dish in dishes %}
-      <article>
-        <img src="{{ dish.image.url }}" alt="{{ dish.name }}" />
-        <h2>{{ dish.name }}</h2>
-        {% if dish.description %}
-        <p>{{ dish.description }}</p>
-        {% endif %}
-        <p>
-          <span>S/. {{ dish.price }} - Quedan {{ dish.quantity }} platos</span>
-        </p>
-      </article>
-      {% empty %}
-      <p>Todavía no se tiene el menú del día</p>
-      {% endfor %}
-    </main>
-  </body>
-</html>
+{% extends "project/base.html" %}
+
+{% block title %}Menú del día{% endblock title %}
+
+{% block content %}
+<div class="container py-4">
+    <h1 class="text-center mb-4 text-primary">Menú del Día</h1>
+    {% if not menu %}
+    <p class="text-center text-muted">Todavía no se tiene el menú del día</p>
+    {% else %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+        {% for item in menu.menu_items.all %} <!-- menu.menuitem_set.all() -->
+        <div class="col d-flex">
+            <div class="card shadow-sm flex-fill">
+                <a href="{% url "menu:dish_detail" pk=item.dish.id %}" class="d-flex flex-column h-100" style="text-decoration: none">
+                    <img src="{{ item.dish.image.url }}" class="card-img-top" alt="{{ item.dish.name }}">
+                    <div class="card-body flex-grow-1">
+                        <h5 class="card-title">{{ item.dish.name|title }}</h5>
+                        <p class="card-text">
+                            <small class="text-muted">S/. {{ item.price_at_sale }} - Quedan {{ item.remaining_stock }} platos</small>
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}

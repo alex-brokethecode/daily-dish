@@ -1,0 +1,48 @@
+<div class="container pt-5">
+  <h2 class="text-center text-primary my-5 fs-1">Ponte en contacto</h2>
+  <!-- About Start -->
+  <div class="row justify-content-center">
+    <!-- About Item Start -->
+    <div class="col-md-4 mb-4 mb-md-0 text-center">
+      <div
+        class="d-flex align-items-center justify-content-center mb-2 text-primary"
+      >
+        <i class="fa-solid fa-location-dot me-2"></i>
+        <h5 class="mb-0">Dirección</h5>
+      </div>
+      <p class="text-muted mb-0">
+        {% if business.address %} {{ business.address }} {% else %} Tu dirección {% endif %}
+      </p>
+    </div>
+    <!-- About Item End -->
+
+    <!-- About Item Start -->
+    <div class="col-md-4 mb-4 mb-md-0 text-center">
+      <div
+        class="d-flex align-items-center justify-content-center mb-2 text-primary"
+      >
+        <i class="fa-solid fa-clock me-2"></i>
+        <h5 class="mb-0">Horario de Atención</h5>
+      </div>
+      <p class="text-muted mb-0">
+        {% if business.business_hour %} {{ business.business_hour }} {% else %} Tu horario de atención {% endif %}
+      </p>
+    </div>
+    <!-- About Item End -->
+
+    <!-- About Item Start -->
+    <div class="col-md-4 mb-md-1 mb-md-0 text-center">
+      <div
+        class="d-flex align-items-center justify-content-center mb-2 text-primary"
+      >
+        <i class="fa-solid fa-phone-volume me-2"></i>
+        <h5 class="mb-0">Whatsapp</h5>
+      </div>
+      <p class="text-muted">
+        {% if business.phone_number %} {{ business.phone_number }} {% else %} 999 999 999 {% endif %}
+      </p>
+    </div>
+    <!-- About Item End -->
+  </div>
+  <!-- About End -->
+</div>
